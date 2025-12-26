@@ -123,7 +123,7 @@ public class EnemyFireC : MonoBehaviour
         Gizmos.DrawLine(tr, tl);
         Gizmos.DrawLine(tl, bl);
 
-        // Optional: draw a line to player so you can see relative position
+        // Draw a line to player so you can see relative position
         if (Application.isPlaying && _player != null)
         {
             Gizmos.color = Color.cyan;

@@ -1639,6 +1639,8 @@ MonoBehaviour:
   - {fileID: 5787492814957801686, guid: 3dce10aca25c8ba4786910be1cd9804c, type: 3}
   - {fileID: 3870422222803856379, guid: b931706f762d9be41bf0d381251cf740, type: 3}
   _enemyContainer: {fileID: 1775642741}
+  _bossPrefab: {fileID: 67480706111464689, guid: c8db760d8b7f2b0409cf31d36ecf5d27,
+    type: 3}
   _powerUps:
   - {fileID: 1883092956272037792, guid: 4e54151c2655ff448a951a86e4649c68, type: 3}
   - {fileID: 6351539073502098645, guid: 56a01798d353a5a45ac79f40e2289ceb, type: 3}
@@ -2317,7 +2319,7 @@ PrefabInstance:
     - target: {fileID: 900817671200977907, guid: 49aef5759902d2b468e6d82fa32bfee0,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3608639005961850591, guid: 49aef5759902d2b468e6d82fa32bfee0,
         type: 3}

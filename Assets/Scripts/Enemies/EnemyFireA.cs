@@ -94,8 +94,8 @@ public class EnemyFireA : MonoBehaviour
     {
         if (!_showFrontFireGizmo) return;
 
-        // Draw a vertical "strip" above the enemy representing the rear-fire alignment window.
-        // Width = 2 * _rearXWindow, Height = _rearRangeHeight.
+        // Draw a vertical "strip" below the enemy representing the alignment window.
+        // Width = 2 * _frontXWindow, Height = _frontRangeHeight.
         Vector3 origin = transform.position + Vector3.up * _frontRangeStartOffset;
 
         float leftX = origin.x - _frontXWindow;
@@ -105,7 +105,7 @@ public class EnemyFireA : MonoBehaviour
         float bottomY = origin.y - _frontRangeHeight;
 
         // Choose color:
-        // - Green if rear-fire condition is currently true (in play mode and player exists)
+        // - Green if fireaway condition is currently true (in play mode and player exists)
         // - Yellow otherwise
         bool frontCondition = false;
         if (Application.isPlaying && _pwrUPs != null)
@@ -128,7 +128,7 @@ public class EnemyFireA : MonoBehaviour
         Gizmos.DrawLine(tr, tl);
         Gizmos.DrawLine(tl, bl);
 
-        // Optional: draw a line to player so you can see relative position
+        // Draw a line to player so you can see relative position
         if (Application.isPlaying && _pwrUPs != null)
         {
             Gizmos.color = Color.cyan;

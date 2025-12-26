@@ -9,7 +9,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject _enemyContainer; //Container to keep Enemy spawns from cluttering the Edit UI
     [SerializeField]
-
+    private GameObject _bossPrefab;
+    [SerializeField]
     private GameObject[] _powerUps;  //Array containing the Power Up Prefabs, spawned based on ID# generated below
     private int _PowerUpID;
 
@@ -72,22 +73,22 @@ public class SpawnManager : MonoBehaviour
 
                     if (_randomEnemy < 40)
                     {
-                        _enemyID = 0;       //Enemy
+                        _enemyID = 0;       //Enemy (Homing)
                     }
                     else if (_randomEnemy >= 40 && _randomEnemy < 70)
                     {
-                        _enemyID = 1;       //Enemy B
+                        _enemyID = 1;       //Enemy B (Zig-Zag)
                     }
                     else if (_randomEnemy >= 70 && _randomEnemy < 85)
                     {
-                        _enemyID = 2;       //Enemy C
+                        _enemyID = 2;       //Enemy C (Missile)
                     }
                     else
                     {
-                        _enemyID = 3;       //Enemy D
+                        _enemyID = 3;       //Enemy D (Dodger)
                     }
 
-                        Vector3 _posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+                    Vector3 _posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
                     GameObject _newEnemy = Instantiate(_enemyType[_enemyID], _posToSpawn, Quaternion.identity);
                     _newEnemy.transform.parent = _enemyContainer.transform;
                     _enemiesAlive++;
@@ -95,7 +96,7 @@ public class SpawnManager : MonoBehaviour
                     //Allows enemies to spawn a shield 30% of the time
                     Enemy _enemy = _newEnemy.gameObject.GetComponent<Enemy>();
                     int _enemyShieldActivate = Random.Range(0, 100);
-                    if (_enemyShieldActivate < 60)
+                    if (_enemyShieldActivate < 30)
                     {
                         _enemy.TriggerEnemyShield(true);
                     }
@@ -112,8 +113,13 @@ public class SpawnManager : MonoBehaviour
                 yield return new WaitForSeconds(_timeBetweenWaves);
             }
 
+            _stopSpawningEnemies = true;
             Debug.Log("All waves completed!");
         }
+
+        Debug.Log("Boss Wave!");
+        Vector3 _bossSpawnPos = new Vector3(0, 5, 0);
+        GameObject _boss = Instantiate(_bossPrefab, _bossSpawnPos, Quaternion.identity);
         
     }
 

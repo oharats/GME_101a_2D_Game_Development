@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: d2fdbe0c1a928b647972248db751f62e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _laserPrefab: {instanceID: 0}
+  - _tripleShotLaserPrefab: {instanceID: 0}
+  - _nukePrefab: {instanceID: 0}
+  - _playerShield: {instanceID: 0}
+  - _damageRightEngine: {instanceID: 0}
+  - _damageLeftEngine: {instanceID: 0}
+  - _thruster: {instanceID: 0}
+  - _thrusterReadyLight: {instanceID: 0}
+  - _laserSoundClip: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

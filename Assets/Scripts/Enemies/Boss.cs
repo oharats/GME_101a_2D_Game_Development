@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     [SerializeField]
-    private float _freq = 0.5f;
+    private float _freq = 0.08f;  //Hz, not radians/sec (see below)
     [SerializeField]
     private float _amp = 6.0f;
     [SerializeField]
@@ -65,8 +65,10 @@ public class Boss : MonoBehaviour
 
     void BasicMovement()
     {
-        _oscTime += Time.deltaTime;         //This restarts Time so that the oscillation is centered in the scene
-        float _xPos = (Mathf.Sin(_oscTime * _freq)) * _amp;
+        _oscTime += Time.deltaTime;    //This restarts Time so that the oscillation is centered in the scene
+        
+        //2f * Mathf.PI converts radians/sec to Hz
+        float _xPos = (Mathf.Sin(_oscTime * 2f * Mathf.PI * _freq)) * _amp;             
         transform.position = new Vector3(_centerPos.x + _xPos, _centerPos.y, _centerPos.z);
             
     }

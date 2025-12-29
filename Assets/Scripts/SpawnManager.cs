@@ -16,6 +16,7 @@ public class SpawnManager : MonoBehaviour
 
     private float _spawnDelay = 3f;
     private bool _stopSpawningEnemies = false;
+    [SerializeField]
     private bool _stopSpawningPowerUps = false;
 
     [SerializeField]

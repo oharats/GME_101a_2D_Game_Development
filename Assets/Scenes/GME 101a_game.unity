@@ -475,7 +475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447590433}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3.53, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 2005383260}
@@ -1650,6 +1650,7 @@ MonoBehaviour:
   - {fileID: 7292226034959874118, guid: c36654ab758b08c4987aa5702d1611c2, type: 3}
   - {fileID: 6086302649922379606, guid: 02351e41a2c90484ab497965c2e1afa7, type: 3}
   - {fileID: 5034828273318607412, guid: 831558a3ed83823479f8ea0d33988a07, type: 3}
+  _stopSpawningPowerUps: 0
   _enemiesPerWave: 02000000030000000300000004000000050000000500000006000000070000000700000008000000
   _timeBetweenSpawns: 2
   _timeBetweenWaves: 8
@@ -2319,7 +2320,7 @@ PrefabInstance:
     - target: {fileID: 900817671200977907, guid: 49aef5759902d2b468e6d82fa32bfee0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3608639005961850591, guid: 49aef5759902d2b468e6d82fa32bfee0,
         type: 3}

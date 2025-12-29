@@ -8,7 +8,7 @@ public class HitBoxL2 : MonoBehaviour
     private int _hitCount = 3;
     [SerializeField]
     private GameObject _damageMidLeft;
-    public bool _isDestroyed = false;
+    public bool _isDown = false;
     public HealthSphereColor _sphereColorML1;
     public HealthSphereColor _sphereColorML2;
     public HealthSphereColor _sphereColorML3;
@@ -31,7 +31,7 @@ public class HitBoxL2 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_isDestroyed == true)
+        if (_isDown == true)
         {
             return;
         }
@@ -54,10 +54,20 @@ public class HitBoxL2 : MonoBehaviour
         }
         else
         {
-            _sphereColorML3 .SetColor(Color.red);
-            _isDestroyed = true;
+            _sphereColorML3.SetColor(Color.red);
+            _isDown = true;
             _damageMidLeft.SetActive(true);
         }
 
     }
+
+    /*private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(
+            $"[Trigger ENTER] Hit by: {other.name} | " +
+            $"Tag: {other.tag} | " +
+            $"Layer: {LayerMask.LayerToName(other.gameObject.layer)}"
+        );
+    }*/
+
 }

@@ -31,6 +31,7 @@ public class Boss_Cannons_L : MonoBehaviour
         }
     }
 
+    //Firing Protocol
     private void FireCannons()
     {
         _fireRate = Random.Range(1f, 3f);
@@ -39,6 +40,7 @@ public class Boss_Cannons_L : MonoBehaviour
         GameObject _cannonFire = Instantiate(_cannonPrefab, _position, _cannonPrefab.transform.rotation);
     }
 
+    //Health Protocol
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (_isDown == true)
@@ -52,10 +54,18 @@ public class Boss_Cannons_L : MonoBehaviour
             Destroy(other.gameObject);
 
             _hitCount--;
+        }
+        else if (other.tag == "Nuke")
+        {
+            //Destroy Nuke 
+            Destroy(other.gameObject, 4.0f);
 
+            //Nukes hit for 2 dmg
+            _hitCount--;
+            _hitCount--;
         }
 
-        if (_hitCount == 0)
+        if (_hitCount <= 0)
         {
             _damageLeft.SetActive(true);
             _isDown = true;

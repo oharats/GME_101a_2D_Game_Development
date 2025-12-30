@@ -8,15 +8,17 @@ public class HitBoxR1 : MonoBehaviour
     private int _hitCount = 3;
     [SerializeField]
     private GameObject _damageRight;
-    public bool _isDown = false;
+    public bool _isDestroyed = false;
     public HealthSphereColor _sphereColorR1;
     public HealthSphereColor _sphereColorR2;
     public HealthSphereColor _sphereColorR3;
+    public Boss _boss;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        _boss = GameObject.Find("FinalBoss").GetComponent<Boss>();
         _sphereColorR1 = transform.Find("BossR1").GetComponent<HealthSphereColor>();
         _sphereColorR2 = transform.Find("BossR2").GetComponent<HealthSphereColor>();
         _sphereColorR3 = transform.Find("BossR3").GetComponent<HealthSphereColor>();
@@ -31,7 +33,7 @@ public class HitBoxR1 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_isDown == true)
+        if (_isDestroyed == true)
         {
             return;
         }
@@ -43,6 +45,15 @@ public class HitBoxR1 : MonoBehaviour
 
             _hitCount--;
         }
+        else if (other.tag == "Nuke")
+        {
+            //Destroy Nuke 
+            Destroy(other.gameObject, 4.0f);
+
+            //Nukes hit for 2 dmg
+            _hitCount--;
+            _hitCount--;
+        }
 
         if (_hitCount == 2)
         {
@@ -50,24 +61,16 @@ public class HitBoxR1 : MonoBehaviour
         }
         else if (_hitCount == 1)
         {
+            _sphereColorR1.SetColor(Color.red);
             _sphereColorR2.SetColor(Color.red);
         }
-        else
+        else if (_hitCount <= 0)
         {
             _sphereColorR3.SetColor(Color.red);
             _damageRight.SetActive(true);
-            _isDown = true;
+            _isDestroyed = true;
+            _boss.HitBoxR1Dead();
         }
     }
-
-   /* private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log(
-            $"[Trigger ENTER] Hit by: {other.name} | " +
-            $"Tag: {other.tag} | " +
-            $"Layer: {LayerMask.LayerToName(other.gameObject.layer)}"
-        );
-    }*/
-
 
 }

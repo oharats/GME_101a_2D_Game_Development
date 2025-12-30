@@ -8,15 +8,17 @@ public class HitBoxL1 : MonoBehaviour
     private int _hitCount = 3;
     [SerializeField]
     private GameObject _damageLeft;
-    public bool _isDown = false;
+    public bool _isDestroyed = false;
     public HealthSphereColor _sphereColorL1;
     public HealthSphereColor _sphereColorL2;
     public HealthSphereColor _sphereColorL3;
+    public Boss _boss;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        _boss = GameObject.Find("FinalBoss").GetComponent<Boss>();
         _sphereColorL1 = transform.Find("BossL1").GetComponent<HealthSphereColor>();
         _sphereColorL2 = transform.Find("BossL2").GetComponent <HealthSphereColor>();
         _sphereColorL3 = transform.Find("BossL3").GetComponent<HealthSphereColor>();
@@ -31,7 +33,7 @@ public class HitBoxL1 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_isDown == true)
+        if (_isDestroyed == true)
         {
             return;
         }
@@ -43,6 +45,15 @@ public class HitBoxL1 : MonoBehaviour
 
             _hitCount--;
         }
+        else if (other.tag == "Nuke")
+        {
+            //Destroy Nuke 
+            Destroy(other.gameObject, 4.0f);
+
+            //Nukes hit for 2 dmg
+            _hitCount--;
+            _hitCount--;
+        }
 
         if (_hitCount == 2)
         {
@@ -50,23 +61,15 @@ public class HitBoxL1 : MonoBehaviour
         }
         else if (_hitCount == 1)
         {
+            _sphereColorL1.SetColor(Color.red);
             _sphereColorL2.SetColor(Color.red);
         }
-        else
+        else if (_hitCount <= 0)
         {
             _sphereColorL3.SetColor(Color.red);
             _damageLeft.SetActive(true);
-            _isDown = true;
+            _isDestroyed = true;
+            _boss.HitBoxL1Dead();
         }
     }
-
-    /*private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log(
-            $"[Trigger ENTER] Hit by: {other.name} | " +
-            $"Tag: {other.tag} | " +
-            $"Layer: {LayerMask.LayerToName(other.gameObject.layer)}"
-        );
-    }*/
-
 }

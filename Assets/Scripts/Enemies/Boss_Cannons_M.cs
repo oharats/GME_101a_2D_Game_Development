@@ -10,6 +10,14 @@ public class Boss_Cannons_M : MonoBehaviour
     private float _canFire = -1.0f;
     private float _offset = -1.1f;
 
+    [SerializeField]
+    private int _hitCount = 3;
+    [SerializeField]
+    private GameObject _damageMid1;
+    [SerializeField]
+    private GameObject _damageMid2;
+    private bool _isDown = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,17 +27,55 @@ public class Boss_Cannons_M : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > _canFire)
+        if (Time.time > _canFire && _isDown == false)
         {
             FireCannons();
         }
     }
 
+    //Firing Protocol
     private void FireCannons()
     {
         _fireRate = Random.Range(1f, 3f);
         _canFire = Time.time + _fireRate;
         Vector3 _position = new Vector3(transform.position.x, transform.position.y + _offset, 0);
         GameObject _cannonFire = Instantiate(_cannonPrefab, _position, _cannonPrefab.transform.rotation);
+    }
+
+    //Health Protocol
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (_isDown == true)
+        {
+            return;
+        }
+
+        if (other.tag == "Laser")
+        {
+            //Destroy Laser
+            Destroy(other.gameObject);
+
+            _hitCount--;
+        }
+        else if (other.tag == "Nuke")
+        {
+            //Destroy Nuke 
+            Destroy(other.gameObject, 4.0f);
+
+            //Nukes hit for 2 dmg
+            _hitCount--;
+            _hitCount--;
+        }
+
+        if (_hitCount == 1)
+        {
+            _damageMid1.SetActive(true);
+        }
+        else if (_hitCount <= 0)
+        {
+            _damageMid2.SetActive(true);
+            _isDown = true;
+        }
+    
     }
 }

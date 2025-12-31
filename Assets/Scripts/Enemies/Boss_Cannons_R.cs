@@ -27,9 +27,14 @@ public class Boss_Cannons_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > _canFire && _isDown == false)
+        bool _isDead = GameObject.Find("FinalBoss(Clone)").GetComponent<Boss>().IsDead();
+
+        if (!_isDead)
         {
-            FireCannons();
+            if (Time.time > _canFire && !_isDown)
+            {
+                FireCannons();
+            }
         }
     }
 

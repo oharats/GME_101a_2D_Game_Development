@@ -18,7 +18,13 @@ public class HitBoxL2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _boss = GameObject.Find("FinalBoss").GetComponent<Boss>();
+        _boss = GameObject.Find("FinalBoss(Clone)").GetComponent<Boss>();
+
+        if (_boss == null)
+        {
+            Debug.LogError("Final Boss is NULL!");
+        }
+
         _sphereColorML1 = transform.Find("BossML1").GetComponent<HealthSphereColor>();
         _sphereColorML2 = transform.Find("BossML2").GetComponent<HealthSphereColor>();
         _sphereColorML3 = transform.Find("BossML3").GetComponent<HealthSphereColor>();

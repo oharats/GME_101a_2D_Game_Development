@@ -28,14 +28,21 @@ public class SpawnManager : MonoBehaviour
     private float _timeBetweenWaves = 8f;
     
     private GameManager _gameManager;
+    private UIManager _uiManager;
         
     private void Start()
     {
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
-                
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
         if (_gameManager == null )
         {
             Debug.LogError("Game Manager is NULL");
+        }
+
+        if (_uiManager == null )
+        {
+            Debug.LogError("UI Manager is NULL");
         }
     }
 
@@ -121,7 +128,7 @@ public class SpawnManager : MonoBehaviour
         Debug.Log("Boss Wave!");
         Vector3 _bossSpawnPos = new Vector3(0, 5, 0);
         GameObject _boss = Instantiate(_bossPrefab, _bossSpawnPos, Quaternion.identity);
-        
+        _uiManager.BossRegister();
     }
 
     public void EnemyKilled()  //Decremented from Enemy script Kill() method

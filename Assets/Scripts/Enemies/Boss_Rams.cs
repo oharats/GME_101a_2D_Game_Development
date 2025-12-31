@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class Boss_Rams : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //Script attached to Boss Ram Hit Boxes
 
     public void OnTriggerEnter2D(Collider2D other)
     {

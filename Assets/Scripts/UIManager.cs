@@ -16,11 +16,14 @@ public class UIManager : MonoBehaviour
     private Text _AmmoCountText;
     [SerializeField]
     private Text _outOfAmmoText;
+    [SerializeField]
+    private Text _victoryText;
 
     private float _thrustCD;
 
     private Player _playerHandle;
     private GameManager _gameManager;
+    private Boss _boss;
 
     [SerializeField]
     private Image _livesDisplay;
@@ -35,12 +38,13 @@ public class UIManager : MonoBehaviour
         _gameOverText.gameObject.SetActive(false);
         _restartLevel.gameObject.SetActive(false);
         _outOfAmmoText.gameObject.SetActive(false);
+        _victoryText.gameObject.SetActive(false);   
         _thrustTimerText.text = "Thrusters Ready!";
 
         //Calls to other Game Objects with NULL checks
         _playerHandle = GameObject.Find("Player").GetComponent<Player>();
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
-
+        
         if (_playerHandle == null)
         {
             Debug.LogError("Player is NULL");
@@ -117,12 +121,7 @@ public class UIManager : MonoBehaviour
 
         //Displays 'Restart" text on screen
         _restartLevel.gameObject.SetActive(true);
-
-        //Remove the below command because it caused a timing error:
-        //I think it was redundant because the Spawn Manager already calls the method
-        /*
-        _gameManager.GameOver();
-        */
+        
     }
 
     //Flashes 'Game Over' On screen
@@ -133,6 +132,31 @@ public class UIManager : MonoBehaviour
             _gameOverText.gameObject.SetActive(true);
             yield return new WaitForSeconds(0.5f);
             _gameOverText.gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    public void BossRegister()
+    {
+        _boss = GameObject.Find("FinalBoss(Clone)").GetComponent<Boss>();
+        if (_boss == null)
+        {
+            Debug.LogError("Final Boss is NULL!");
+        }
+    }
+
+    public void Victory()
+    {
+        StartCoroutine(VictoryText());
+    }
+
+    IEnumerator VictoryText()
+    {
+        while (true)
+        {
+            _victoryText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            _victoryText.gameObject.SetActive(false);
             yield return new WaitForSeconds(0.5f);
         }
     }

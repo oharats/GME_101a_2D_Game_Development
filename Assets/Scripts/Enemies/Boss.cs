@@ -10,7 +10,7 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private float _amp = 6.0f;
     [SerializeField]
-    private float _oscPhaseTime = Random.Range(4f, 8f);
+    private float _oscPhaseTime = 4f;
 
     [Header("Into Move Durations")]
     [SerializeField]
@@ -35,17 +35,33 @@ public class Boss : MonoBehaviour
     private Vector3 _ramBottomPos = new Vector3(0, 1, 0); 
 
     private float _oscTime = 0f;
+    [SerializeField]
     private bool _isDead = false;
 
+    [Header("Hit Boxes")]
     public bool _hitBoxL1Dead = false;
     public bool _hitBoxL2Dead = false;
     public bool _hitBoxR1Dead = false;
     public bool _hitBoxR2Dead = false;
 
+    private UIManager _uiManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
+        if (_uiManager == null)
+        {
+            Debug.LogError("The UI Manager is NULL");
+        }
+
         StartCoroutine(BossRoutine());
+    }
+
+    private void Update()
+    {
+        
     }
 
     IEnumerator BossRoutine ()
@@ -105,25 +121,68 @@ public class Boss : MonoBehaviour
         transform.position = end;
     }
 
-
-
-    public void HitBoxL1Dead ()
+    private void Death()
     {
-        _hitBoxL1Dead = true; 
+        if (_hitBoxL1Dead && _hitBoxL2Dead && _hitBoxR1Dead && _hitBoxR2Dead)
+        {
+            _isDead = true;
+            StopCoroutine(BossRoutine());
+            StartCoroutine(BossDeath());
+            _uiManager.Victory();
+        }
     }
 
-    public void HitBoxL2Dead ()
+    public bool IsDead()        //Used to call to the Cannons for firing permission
+    {
+        return this._isDead;
+    }
+
+    IEnumerator MoveToDeath(Vector3 start, Vector3 end, float duration)
+    {
+        float _elapsed = 0;
+        transform.position = start;
+
+        while (_elapsed < duration)
+        {
+            _elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(_elapsed / duration);
+            transform.position = Vector3.Lerp(start, end, t);
+            yield return null;
+        }
+
+        transform.position = end;
+    }
+
+    IEnumerator BossDeath()
+    {
+        while (_isDead)
+        {
+            yield return StartCoroutine(MoveToDeath(transform.position, new Vector3(0, 5, 0), 8.0f));
+            yield return StartCoroutine(MoveToDeath(new Vector3(0, 5, 0), new Vector3(0, 15, 0), 5.0f));
+        }
+    }
+
+    public void HitBoxL1Dead()
+    {
+        _hitBoxL1Dead = true;
+        Death();
+    }
+
+    public void HitBoxL2Dead()
     {
         _hitBoxL2Dead = true;
-    }
-    
-    public void HitBoxR1Dead ()
-    {
-        _hitBoxR1Dead = true;
+        Death();
     }
 
-    public void HitBoxR2Dead ()
+    public void HitBoxR1Dead()
+    {
+        _hitBoxR1Dead = true;
+        Death();
+    }
+
+    public void HitBoxR2Dead()
     {
         _hitBoxR2Dead = true;
+        Death();
     }
 }

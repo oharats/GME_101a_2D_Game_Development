@@ -48,9 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _freq: 0.08
   _amp: 6
+  _oscPhaseTime: 4
   _moveTimeSegA: 5
   _moveTimeSegB: 2
   _moveTimeSegC: 1.25
+  _centerMoveTime: 0.75
+  _ramDownTime: 0.6
+  _returnHomeTime: 0.9
+  _homePos: {x: 0, y: 5, z: 0}
+  _ramBottomPos: {x: 0, y: 1, z: 0}
+  _hitBoxL1Dead: 0
+  _hitBoxL2Dead: 0
+  _hitBoxR1Dead: 0
+  _hitBoxR2Dead: 0
 --- !u!1 &126574285695081853
 GameObject:
   m_ObjectHideFlags: 0
@@ -2203,10 +2213,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitCount: 3
   _damageRight: {fileID: 2325121211150830317}
-  _isDown: 0
+  _isDestroyed: 0
   _sphereColorR1: {fileID: 6726211106765071233}
   _sphereColorR2: {fileID: 5909850126747673916}
   _sphereColorR3: {fileID: 3261235121497323356}
+  _boss: {fileID: 2745389293965805802}
 --- !u!61 &2977750093044240218
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2420,10 +2431,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitCount: 3
   _damageLeft: {fileID: 7277815772913466475}
-  _isDown: 0
+  _isDestroyed: 0
   _sphereColorL1: {fileID: 4172492408441416158}
   _sphereColorL2: {fileID: 108835145747716017}
   _sphereColorL3: {fileID: 9053659600284578950}
+  _boss: {fileID: 2745389293965805802}
 --- !u!61 &1323533988154713585
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3027,10 +3039,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitCount: 3
   _damageMidRight: {fileID: 126574285695081853}
-  _isDown: 0
+  _isDestroyed: 0
   _sphereColorMR1: {fileID: 1520385260996078471}
   _sphereColorMR2: {fileID: 4411450951459399777}
   _sphereColorMR3: {fileID: 7856922379506259983}
+  _boss: {fileID: 2745389293965805802}
 --- !u!61 &3405941492629277655
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3767,10 +3780,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitCount: 3
   _damageMidLeft: {fileID: 4107266046771211744}
-  _isDown: 0
+  _isDestroyed: 0
   _sphereColorML1: {fileID: 37191596972429752}
   _sphereColorML2: {fileID: 7540406363206808209}
   _sphereColorML3: {fileID: 135891881443337972}
+  _boss: {fileID: 2745389293965805802}
 --- !u!61 &4963819761341508070
 BoxCollider2D:
   m_ObjectHideFlags: 0

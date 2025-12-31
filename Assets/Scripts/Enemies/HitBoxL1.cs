@@ -13,12 +13,18 @@ public class HitBoxL1 : MonoBehaviour
     public HealthSphereColor _sphereColorL2;
     public HealthSphereColor _sphereColorL3;
     public Boss _boss;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
-        _boss = GameObject.Find("FinalBoss").GetComponent<Boss>();
+        _boss = GameObject.Find("FinalBoss(Clone)").GetComponent<Boss>();
+
+        if (_boss == null)
+        {
+            Debug.LogError("Final Boss is NULL!");
+        }
+
         _sphereColorL1 = transform.Find("BossL1").GetComponent<HealthSphereColor>();
         _sphereColorL2 = transform.Find("BossL2").GetComponent <HealthSphereColor>();
         _sphereColorL3 = transform.Find("BossL3").GetComponent<HealthSphereColor>();

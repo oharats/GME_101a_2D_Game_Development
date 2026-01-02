@@ -55,6 +55,7 @@ public class Boss : MonoBehaviour
     private GameObject _explode04;
     [SerializeField]
     private GameObject _explode05;
+    [SerializeField]
 
     private UIManager _uiManager;
     private SpawnManager _spawnManager;
@@ -192,23 +193,27 @@ public class Boss : MonoBehaviour
             yield return StartCoroutine(MoveToDeath(new Vector3(0, 5, 0), new Vector3(0, 15, 0), 5.0f));
             Destroy(gameObject);
         }
-        
     }
 
     IEnumerator DeathExplosions()
     {
         while (_isDead)
         {
-            yield return new WaitForSeconds(1);
-            _explode01.SetActive(true);
-            yield return new WaitForSeconds(1);
-            _explode02.SetActive(true);
-            yield return new WaitForSeconds(1);
-            _explode03.SetActive(true);
-            _explode04.SetActive(true);
-            yield return new WaitForSeconds(1);
-            _explode05.SetActive(true);
+            yield return TriggerExplosions(_explode01);         //Audio for each explosion is triggered
+            yield return TriggerExplosions(_explode02);         //by and Animation Event attached to the 16th
+            yield return TriggerExplosions(_explode03);         //keyframe of the explosion animation
+            yield return TriggerExplosions(_explode04);         //Each of these child game objects has the
+            yield return TriggerExplosions(_explode05);         //Animator, AudioSource and Script for the sound
         }
+    }
+
+    IEnumerator TriggerExplosions (GameObject go)
+    {
+        go.SetActive(false);
+        yield return null;              //One from so Unity registers reset of the animation each time
+        go.SetActive(true);
+      
+        yield return new WaitForSeconds(1);             //Time between explosions
     }
 
     public void HitBoxL1Dead()

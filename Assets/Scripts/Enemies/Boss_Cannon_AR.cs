@@ -16,11 +16,20 @@ public class Boss_Cannon_AR : MonoBehaviour
     [SerializeField]
     private GameObject _damageAR;
     private bool _isDown = false;
+    [SerializeField]
+    private AudioSource _audioSource;
+
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        _damageAR.SetActive(false);
+        _audioSource = GetComponent<AudioSource>();
+
+        if (_audioSource == null)
+        {
+            Debug.LogError("Audio Source on Enemy is NULL");
+        }
     }
 
     // Update is called once per frame
@@ -74,6 +83,7 @@ public class Boss_Cannon_AR : MonoBehaviour
         if (_hitCount <= 0)
         {
             _damageAR.SetActive(true);
+            _audioSource.Play();
             _isDown = true;
         }
 

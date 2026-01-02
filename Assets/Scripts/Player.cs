@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     private int _ammoMissiles = 0;
 
     [SerializeField]
-    private float _speed = 3.5f;
+    private float _speed = 4.5f;
     [SerializeField]
     private float _speedMultiplier = 2.5f;
     private float _thrustPower = 1.0f;

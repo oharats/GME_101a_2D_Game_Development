@@ -27,6 +27,7 @@ public class HitBoxL1 : MonoBehaviour
         {
             Debug.LogError("Final Boss is NULL!");
         }
+
         if (_audioSource == null)
         {
             Debug.LogError("Audio Source on Enemy is NULL");

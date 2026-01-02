@@ -7,7 +7,7 @@ public class EnemyMovementC : MonoBehaviour
 
     [Header("Ram Player")]
     [SerializeField]
-    private float _homingRange = 3.0f;
+    private float _homingRange = 4.0f;
     [SerializeField]
     private Transform _player;      //Assigned in the Inspector, but we also use a tag find
 

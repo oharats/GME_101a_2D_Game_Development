@@ -17,11 +17,21 @@ public class Boss_Cannons_R : MonoBehaviour
     [SerializeField]
     private GameObject _damageR2;
     private bool _isDown = false;
+    [SerializeField]
+    private AudioSource _audioSource;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        _damageR1.SetActive(false);
+        _damageR2.SetActive(false);
+        _audioSource = GetComponent<AudioSource>();
 
+        if (_audioSource == null)
+        {
+            Debug.LogError("Audio Source on Enemy is NULL");
+        }
     }
 
     // Update is called once per frame
@@ -79,6 +89,7 @@ public class Boss_Cannons_R : MonoBehaviour
         else if (_hitCount <= 0)
         {
             _damageR2.SetActive(true);
+            _audioSource.Play();
             _isDown = true;
         }
     }

@@ -8,20 +8,29 @@ public class HitBoxR2 : MonoBehaviour
     private int _hitCount = 3;
     [SerializeField]
     private GameObject _damageMidRight;
+    [SerializeField]
+    private AudioSource _audioSource;
     public bool _isDestroyed = false;
     public HealthSphereColor _sphereColorMR1;
     public HealthSphereColor _sphereColorMR2;
     public HealthSphereColor _sphereColorMR3;
     public Boss _boss;
 
+
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _boss = GameObject.Find("FinalBoss(Clone)").GetComponent<Boss>();
 
         if (_boss == null)
         {
             Debug.LogError("Final Boss is NULL!");
+        }
+
+        if (_audioSource == null)
+        {
+            Debug.LogError("Audio Source on Enemy is NULL");
         }
 
         _sphereColorMR1 = GameObject.Find("BossMR1").GetComponent<HealthSphereColor>();
@@ -73,6 +82,7 @@ public class HitBoxR2 : MonoBehaviour
         {
             _sphereColorMR3.SetColor(Color.red);
             _damageMidRight.SetActive(true);
+            _audioSource.Play();
             _isDestroyed = true;
             _boss.HitBoxR2Dead();
         }

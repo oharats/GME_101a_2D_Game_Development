@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
     private bool _stopSpawningPowerUps = false;
 
     [SerializeField]
-    private int[] _enemiesPerWave = { 2, 3, 3, 4, 5, 5, 6, 7, 7, 8 };
+    private int[] _enemiesPerWave = { 2, 3, 3, 4, 4, 5, 5, 6, 7 };
     private int _enemiesAlive;
     [SerializeField]
     private float _timeBetweenSpawns = 2f;
@@ -79,15 +79,15 @@ public class SpawnManager : MonoBehaviour
 
                     int _randomEnemy = Random.Range(0, 100);
 
-                    if (_randomEnemy < 40)
+                    if (_randomEnemy < 60)
                     {
-                        _enemyID = 0;       //Enemy (Homing)
+                        _enemyID = 0;       //Enemy B (Zig-Zag)
                     }
-                    else if (_randomEnemy >= 40 && _randomEnemy < 70)
+                    else if (_randomEnemy >= 60 && _randomEnemy < 70)
                     {
-                        _enemyID = 1;       //Enemy B (Zig-Zag)
+                        _enemyID = 1;       //Enemy (Homing)
                     }
-                    else if (_randomEnemy >= 70 && _randomEnemy < 85)
+                    else if (_randomEnemy >= 70 && _randomEnemy < 90)
                     {
                         _enemyID = 2;       //Enemy C (Missile)
                     }
@@ -153,11 +153,11 @@ public class SpawnManager : MonoBehaviour
             {
                 _PowerUpID = 4;     //Health
             }
-            else if (_randomPwrUP >= 55 && _randomPwrUP < 65)
+            else if (_randomPwrUP >= 55 && _randomPwrUP < 60)
             {
                 _PowerUpID = 5;     //Nuke
             }
-            else if (_randomPwrUP >= 65 && _randomPwrUP < 70)
+            else if (_randomPwrUP >= 60 && _randomPwrUP < 70)
             {
                 _PowerUpID = 7;     //Missiles
             }

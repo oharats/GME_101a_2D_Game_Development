@@ -44,19 +44,46 @@ public class Boss : MonoBehaviour
     public bool _hitBoxR1Dead = false;
     public bool _hitBoxR2Dead = false;
 
+    [Header("Explosions")]
+    [SerializeField]
+    private GameObject _explode01;
+    [SerializeField]
+    private GameObject _explode02;
+    [SerializeField]
+    private GameObject _explode03;  
+    [SerializeField]
+    private GameObject _explode04;
+    [SerializeField]
+    private GameObject _explode05;
+
     private UIManager _uiManager;
+    private SpawnManager _spawnManager;
+    private GameManager _gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
         if (_uiManager == null)
         {
             Debug.LogError("The UI Manager is NULL");
         }
 
+        if (_spawnManager == null)
+        {
+            Debug.LogError("Spawn Manager is NULL");
+        }
+
         StartCoroutine(BossRoutine());
+
+        _explode01.SetActive(false);
+        _explode02.SetActive(false);
+        _explode03.SetActive(false);
+        _explode04.SetActive(false);
+        _explode05.SetActive(false);
     }
 
     private void Update()
@@ -128,7 +155,11 @@ public class Boss : MonoBehaviour
             _isDead = true;
             StopCoroutine(BossRoutine());
             StartCoroutine(BossDeath());
+            StartCoroutine(DeathExplosions());
             _uiManager.Victory();
+            _gameManager.Victory();
+            _spawnManager.OnVictory();
+            
         }
     }
 
@@ -157,8 +188,26 @@ public class Boss : MonoBehaviour
     {
         while (_isDead)
         {
-            yield return StartCoroutine(MoveToDeath(transform.position, new Vector3(0, 5, 0), 8.0f));
+            yield return StartCoroutine(MoveToDeath(transform.position, new Vector3(0, 5, 0), 6.0f));
             yield return StartCoroutine(MoveToDeath(new Vector3(0, 5, 0), new Vector3(0, 15, 0), 5.0f));
+            Destroy(gameObject);
+        }
+        
+    }
+
+    IEnumerator DeathExplosions()
+    {
+        while (_isDead)
+        {
+            yield return new WaitForSeconds(1);
+            _explode01.SetActive(true);
+            yield return new WaitForSeconds(1);
+            _explode02.SetActive(true);
+            yield return new WaitForSeconds(1);
+            _explode03.SetActive(true);
+            _explode04.SetActive(true);
+            yield return new WaitForSeconds(1);
+            _explode05.SetActive(true);
         }
     }
 

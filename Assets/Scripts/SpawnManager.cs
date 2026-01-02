@@ -178,6 +178,11 @@ public class SpawnManager : MonoBehaviour
         _stopSpawningEnemies = true;
         _gameManager.GameOver();
     }
+
+    public void OnVictory()
+    {
+        _stopSpawningPowerUps = true;
+    }
 }
 
 

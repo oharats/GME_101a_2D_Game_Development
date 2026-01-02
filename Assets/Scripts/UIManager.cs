@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     private Text _outOfAmmoText;
     [SerializeField]
     private Text _victoryText;
+    [SerializeField]
+    private Text _mainMenuText;
 
     private float _thrustCD;
 
@@ -38,7 +40,8 @@ public class UIManager : MonoBehaviour
         _gameOverText.gameObject.SetActive(false);
         _restartLevel.gameObject.SetActive(false);
         _outOfAmmoText.gameObject.SetActive(false);
-        _victoryText.gameObject.SetActive(false);   
+        _victoryText.gameObject.SetActive(false); 
+        _mainMenuText.gameObject.SetActive(false);
         _thrustTimerText.text = "Thrusters Ready!";
 
         //Calls to other Game Objects with NULL checks
@@ -148,6 +151,9 @@ public class UIManager : MonoBehaviour
     public void Victory()
     {
         StartCoroutine(VictoryText());
+
+        //Displays "Main Menu" text on screen
+        _mainMenuText.gameObject.SetActive(true);
     }
 
     IEnumerator VictoryText()

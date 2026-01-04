@@ -229,7 +229,6 @@ public class Player : MonoBehaviour
         {
             Vector3 _posToSpawn = new Vector3(transform.position.x, _nukePosY, 0);
             Instantiate(_nukePrefab, _posToSpawn, Quaternion.identity);
-            _ammoCount++;
             StartCoroutine(ShutNukeOff());
         }
         if (_isTripleShotActive == true && _isNukeActive != true)

@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
     private bool _stopSpawningPowerUps = false;
 
     [SerializeField]
-    private int[] _enemiesPerWave = { 2, 3, 3, 4, 4, 5, 5, 6, 7 };
+    private int[] _enemiesPerWave = { 2, 2, 3, 3, 4, 4, 5, 5, 6 };
     private int _enemiesAlive;
     [SerializeField]
     private float _timeBetweenSpawns = 2f;

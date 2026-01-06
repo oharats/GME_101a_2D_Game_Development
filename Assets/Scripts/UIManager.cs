@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     private Text _mainMenuText;
 
     private float _thrustCD;
+    private bool _isOutOfAmmo = false;
 
     private Player _playerHandle;
     private GameManager _gameManager;
@@ -89,6 +90,12 @@ public class UIManager : MonoBehaviour
         {
             StartCoroutine(OutOfAmmo());
         }
+    }
+
+    public void UpdateOutOfAmmo()
+    {
+        _isOutOfAmmo = false;
+        StopCoroutine(OutOfAmmo());
     }
 
     public void UpdateThrusterCD(float _coolDown)
@@ -169,7 +176,9 @@ public class UIManager : MonoBehaviour
 
     IEnumerator OutOfAmmo()
     {
-        while (true)
+        _isOutOfAmmo = true;
+
+        while (_isOutOfAmmo)
         {
             _outOfAmmoText.gameObject.SetActive(true);
             yield return new WaitForSeconds(0.5f);

@@ -282,6 +282,7 @@ public class Player : MonoBehaviour
         _ammoCount = 15;
         _haveAmmo = true;
         AmmoCounter(_ammoCount);
+        _uiManager.UpdateOutOfAmmo();
     }
 
     public void MissilePowerUp()
